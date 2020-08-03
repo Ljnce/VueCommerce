@@ -1,32 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Navbar />
+    <Shopping />
+    <!-- <Product
+      v-for="product  in  products"
+      :key="product.id"
+      :id="product.id"
+      :name="product.name"
+      :image="product.image"
+      :price="product.price"
+    /> -->
+    <router-view :products="products"/>
+
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import Navbar from '@/components/Navbar.vue';
+  import Shopping from '@/components/Shopping.vue';
+  // import Product from '@/views/Product.vue';
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  export default {
+    name: "App",
+    computed: {
+      products() {
+        return this.$store.getters.products;
+      }
+    },
+    components: {
+      Navbar,
+      Shopping,
+      // Product
     }
-  }
+  };
+
+</script>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons");
+#app {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 </style>
